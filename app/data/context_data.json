@@ -1,0 +1,74 @@
+[
+  {
+    "field": "SDLC1 Functional/Non-Functional Requirements",
+    "meaning": "Defines what the system should do (functional) and how it should perform (non-functional), such as performance, security, usability.",
+    "importance": "Ensures all stakeholders have a clear understanding of expectations and system boundaries.",
+    "why_record": "Provides a baseline for design, development, and testing; helps avoid scope creep.",
+    "example": "https://example.com/functional-nonfunctional-requirements",
+    "gap_reason": "Missing functional/non-functional requirements document URL."
+  },
+  {
+    "field": "SDLC2 Design and Code Review: Independent Peer Review",
+    "meaning": "A process where peers review design documents and code for quality, correctness, and adherence to standards.",
+    "importance": "Catches defects early, improves code quality, and shares knowledge among team members.",
+    "why_record": "Documents accountability, ensures traceability, and supports compliance/audits.",
+    "example": "https://example.com/design-code-review",
+    "gap_reason": "Missing design/code review checklist or review record URL."
+  },
+  {
+    "field": "SDLC3 DAST (Dynamic Application Security Testing)",
+    "meaning": "Security testing that analyzes a running application to find vulnerabilities.",
+    "importance": "Identifies security issues that only appear during runtime.",
+    "why_record": "Ensures vulnerabilities are caught before deployment.",
+    "example": "https://example.com/dast-report",
+    "gap_reason": "Missing DAST report or scan result URL."
+  },
+  {
+    "field": "SDLC4 SAST (Static Application Security Testing)",
+    "meaning": "Security testing that analyzes source code or binaries for vulnerabilities without executing the program.",
+    "importance": "Detects security flaws early in the development cycle.",
+    "why_record": "Reduces cost and effort to fix vulnerabilities.",
+    "example": "https://example.com/sast-report",
+    "gap_reason": "Missing SAST report or scan result URL."
+  },
+  {
+    "field": "SDLC5 FOSS (Free/Open Source Software) Analysis",
+    "meaning": "Scanning and analyzing open source components for security, license, and quality issues.",
+    "importance": "Prevents use of insecure or non-compliant open source libraries.",
+    "why_record": "Ensures legal and security compliance.",
+    "example": "https://example.com/foss-analysis",
+    "gap_reason": "Missing FOSS analysis report or scan result URL."
+  },
+  {
+    "field": "SDLC6 MAST (Mobile Application Security Testing)",
+    "meaning": "Security testing focused on mobile applications, covering platform-specific risks.",
+    "importance": "Addresses unique threats to mobile apps, such as insecure storage or permissions.",
+    "why_record": "Protects user data and ensures compliance with app store requirements.",
+    "example": "https://example.com/mast-report",
+    "gap_reason": "Missing MAST report or scan result URL."
+  },
+  {
+    "field": "SDLC7: Test Execution",
+    "meaning": "Running test cases to validate the system against requirements.",
+    "importance": "Verifies that the system works as intended and meets requirements.",
+    "why_record": "Provides evidence of quality and readiness for release.",
+    "example": "https://example.com/test-execution-report",
+    "gap_reason": "Missing test execution report or test results URL."
+  },
+  {
+    "field": "SDLC8 Test Impact Assessment and Regression",
+    "meaning": "Evaluating which parts of the system are affected by changes and ensuring unchanged features still work.",
+    "importance": "Prevents new changes from breaking existing functionality.",
+    "why_record": "Documents coverage and helps prioritize testing efforts.",
+    "example": "https://example.com/test-impact-assessment",
+    "gap_reason": "Missing test impact assessment or regression test report URL."
+  },
+  {
+    "field": "SDLC9 - Performance and Stress Testing",
+    "meaning": "Testing how the system performs under expected and extreme loads.",
+    "importance": "Ensures the system can handle real-world usage and degrade gracefully under stress.",
+    "why_record": "Documents system limits and helps plan for scaling.",
+    "example": "https://example.com/performance-stress-test",
+    "gap_reason": "Missing performance/stress test report or results URL."
+  }
+]

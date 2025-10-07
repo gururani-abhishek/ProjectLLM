@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SDLC Expert Chatbot</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .chat-header {
+        font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #e0e7ff 0%, #f7f8fa 100%);
+        font-family: "Segoe UI", Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        height: 100vh;
+      }
+      .chat-container {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18),
+          0 1.5px 4px rgba(59, 130, 246, 0.1);
+        width: 900px;
+        max-width: 98vw;
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        transition: box-shadow 0.3s;
+      }
+      .chat-container:hover {
+        box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.22),
+          0 3px 8px rgba(59, 130, 246, 0.13);
+      }
+      .chat-header {
+        background: linear-gradient(90deg, #3b82f6 60%, #6366f1 100%);
+        color: #fff;
+        padding: 22px 28px;
+        border-radius: 18px 18px 0 0;
+        font-size: 1.35em;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+      }
+      .chat-messages {
+        padding: 24px;
+        height: 420px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: #f9fafb;
+      }
+      .msg {
+        max-width: 80%;
+        padding: 12px 18px;
+        border-radius: 18px;
+        font-size: 1.08em;
+        line-height: 1.5;
+        word-break: break-word;
+        box-shadow: 0 1px 4px rgba(59, 130, 246, 0.04);
+      }
+      .msg.user {
+        align-self: flex-end;
+        background: linear-gradient(90deg, #3b82f6 80%, #60a5fa 100%);
+        color: #fff;
+        border-bottom-right-radius: 6px;
+      }
+      .msg.bot {
+        align-self: flex-start;
+        background: #e5e7eb;
+        color: #222;
+        border-bottom-left-radius: 6px;
+      }
+      .chat-input-row {
+        display: flex;
+        border-top: 1px solid #e5e7eb;
+        padding: 16px;
+        gap: 10px;
+        background: #fff;
+        border-radius: 0 0 18px 18px;
+      }
+      .chat-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1.5px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 1.05em;
+        outline: none;
+        transition: border 0.2s, box-shadow 0.2s;
+        background: #f3f4f6;
+      }
+      .chat-input:focus {
+        border: 2px solid #6366f1;
+        box-shadow: 0 0 0 2px #c7d2fe;
+        background: #fff;
+      }
+      .chat-btn {
+        background: linear-gradient(90deg, #3b82f6 80%, #6366f1 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0 22px;
+        font-size: 1.05em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 4px rgba(59, 130, 246, 0.1);
+      }
+      .chat-btn:active {
+        background: #2563eb;
+      }
+      .clear-btn {
+        background: #e5e7eb;
+        color: #222;
+        margin-left: 8px;
+        border: none;
+        border-radius: 8px;
+        padding: 0 18px;
+        font-size: 1.05em;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 4px rgba(59, 130, 246, 0.04);
+      }
+      .clear-btn:active {
+        background: #d1d5db;
+      }
+      .chat-note {
+        margin-top: 18px;
+        color: #555;
+        font-size: 1em;
+        background: #f1f5f9;
+        border-radius: 6px;
+        padding: 12px 18px;
+        width: 900px;
+        max-width: 95vw;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">SDLC Expert (Chatbot)</div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <form class="chat-input-row" id="chat-form" autocomplete="off">
+        <input
+          class="chat-input"
+          id="chat-input"
+          type="text"
+          placeholder="Type your SDLC question..."
+          autofocus
+        />
+        <button class="chat-btn" type="submit">Send</button>
+        <button class="clear-btn" type="button" id="clear-btn">Clear</button>
+      </form>
+    </div>
+    <div class="chat-note">
+      In every chat please mention the SDLC, or the Field name explicitly, this
+      makes the model effective.
+    </div>
+    <script>
+      const chatMessages = document.getElementById("chat-messages");
+      const chatForm = document.getElementById("chat-form");
+      const chatInput = document.getElementById("chat-input");
+      const clearBtn = document.getElementById("clear-btn");
+
+      function appendMessage(text, sender) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = "msg " + sender;
+        msgDiv.textContent = text;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      chatForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const userText = chatInput.value.trim();
+        if (!userText) return;
+        appendMessage(userText, "user");
+        chatInput.value = "";
+        appendMessage("Thinking...", "bot");
+        try {
+          const resp = await fetch("http://localhost:8000/rag", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: userText }),
+          });
+          const data = await resp.json();
+          chatMessages.removeChild(chatMessages.lastChild);
+          appendMessage(
+            data.answer || "Sorry, I couldn't find an answer.",
+            "bot"
+          );
+        } catch (err) {
+          chatMessages.removeChild(chatMessages.lastChild);
+          appendMessage("Error: " + err, "bot");
+        }
+      });
+
+      clearBtn.addEventListener("click", () => {
+        chatMessages.innerHTML = "";
+        chatInput.value = "";
+        chatInput.focus();
+      });
+    </script>
+  </body>
+</html>
